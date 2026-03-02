@@ -43,6 +43,8 @@ The last element becomes the first one.
 ### Resources
 
 + Space complexity: https://www.datacamp.com/tutorial/space-complexity?dc_referrer=https%3A%2F%2Fwww.google.com%2F
++ Mechanical Turk (Historical Background): https://en.wikipedia.org/wiki/Mechanical_Turk
++ Amazon's Mechanical Turk serivce: https://en.wikipedia.org/wiki/Amazon_Mechanical_Turk
 + 
 
 ### How the implemented algorithm works

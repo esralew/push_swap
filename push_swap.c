@@ -5,31 +5,22 @@
 
 int main(int argc, char **argv)
 {
-    int *stack_a;
-    int *stack_b;
-    int i;
-    int n;
+    t_list *stack_a;
+    //t_list *stack_b;
+    t_list  *current;
 
     (void)argc;
-    n = get_n(argv[1]);
-    printf("number of elements: %d\n", n);
 
-    stack_a = (int *) malloc(n * sizeof(int));
+    stack_a = str_to_list(argv[1]);
     if (!stack_a)
         return (-1); //return ERROR
-    stack_b = (int *) malloc(n * sizeof(int));
-    if (!stack_b)
-        return (-1); //return ERROR
-
-    str_to_arr(argv[1], stack_a, n);
-    if (!stack_a)
-        return (-1); //return ERROR
-    
-        i = 0;
-    while (i < n)
+    //stack_b = NULL;
+    current = stack_a;
+    while (stack_a->next)
     {
-        printf("%d\n", stack_a[i]);
-        i++;
+        printf("%d\n", *((int *) current->content));
+        current = current->next;
     }
+    printf("%d\n", *((int *) current->content));
     return (0);
 }
