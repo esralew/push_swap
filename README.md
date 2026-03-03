@@ -12,6 +12,8 @@
 ### Description
 
 The project push_swap introduces the concept of time complexity in sorting algorithms. The objective is to sort a set of random unique integers in ascending order which are located in a stack data structure. Two stacks a and b can be used for this, where stack a initially contains all the values, whereas stack b is empty. 
+The goal is to use the smallest possible number of operations to sort the stack a. The actual internal operations performed (like e.g. comparing two values) are not relevant.
+
 **Allowed operations**:
 + **swap a**: swap the first 2 elements at the top of stack a.
 Do nothing if there is only one element or none.
@@ -44,7 +46,7 @@ The last element becomes the first one.
 
 + Space complexity: https://www.datacamp.com/tutorial/space-complexity?dc_referrer=https%3A%2F%2Fwww.google.com%2F
 + Mechanical Turk (Historical Background): https://en.wikipedia.org/wiki/Mechanical_Turk
-+ Amazon's Mechanical Turk serivce: https://en.wikipedia.org/wiki/Amazon_Mechanical_Turk
++ Amazon's Mechanical Turk service: https://en.wikipedia.org/wiki/Amazon_Mechanical_Turk
 + 
 
 ### How the implemented algorithm works
@@ -52,6 +54,36 @@ The last element becomes the first one.
 ### Alternative algorithms
 
 ### General Learnings
+
+#### Structs in C
+
+```
+typedef struct s_list
+{
+	void            *content;
+	struct s_list   *next;
+}                         t_list;
+```
+
+This is a combination of a **struct declaration** (struct s_list { ... }), which creates a new type called 'struct s_list' with the fields 'content' and 'next' AND a **typedef instruction** (which could also be spelled 'typedef struct s_list t_list).
+
+The struct t_list is a block of memory that contains the fields specified in the struct. 
+
+```
+t_list *node;
+
+# pointer to the t_list struct called node
+t_list *adress = node;
+
+# a copy of the whole struct node (node is a pointer and we dereference it here)
+t_list temp = *node;
+
+# two identical versions of accessing the content object from the node struct
+void *value = *(node).content;
+void *value = node->content;
+
+```
+
 
 #### Heap Sort
 

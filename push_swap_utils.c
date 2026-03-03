@@ -1,30 +1,23 @@
 
 // 42 HEADER
+
 #include "push_swap.h"
+
+static t_list *build_list(char **split_arr);
+static void    free_split_arr(char **split_arr);
 
 t_list   *str_to_list(char *input_str)
 {
     char    **split_arr;
-    int i;
     t_list   *stack_a;
-    t_list   *node;
-    int value;
 
     split_arr = ft_split(input_str, ' ');
-        if (!split_arr)
-            return (NULL);
-    value = ft_atoi(split_arr[0]);
-    stack_a = ft_lstnew(&value);
-    i = 1;
-    while (split_arr[i])
-    {
-        value = ft_atoi(split_arr[i]);
-        node = ft_lstnew(&value);
-        ft_lstadd_back(&stack_a, node);
-        i++;
-    }
-
-    free_2d_arr(split_arr);
+    if (!split_arr)
+        return (NULL);
+    stack_a = build_list(split_arr);
+    free_split_arr(split_arr);
+    if (!stack_a)
+        return (NULL);
     return (stack_a);
 }
 
@@ -48,17 +41,41 @@ int get_n(char *input_str)
     }
     return (n);
 }
-    */
+*/
 
-void    free_2d_arr(char **arr_2d)
+static void    free_split_arr(char **split_arr)
 {
     int i;
 
 	i = 0;
-	while (arr_2d[i])
+	while (split_arr[i])
 	{
-		free(arr_2d[i]);
+		free(split_arr[i]);
 		i++;
 	}
-	free(arr_2d);
+	free(split_arr);
+}
+
+static t_list *build_list(char **split_arr)
+{
+    int i;
+    t_list   *stack_a;
+    t_list   *node;
+    int *content;   
+
+    stack_a = NULL;
+    i = 0;
+    while (split_arr[i])
+    {
+        content = (int *) malloc(sizeof(int));
+        if (!content)
+            return (ft_lstclear(&stack_a, free), NULL);
+        *content = ft_atoi(split_arr[i]);
+        node = ft_lstnew(content);
+        if (!node)
+            return (ft_lstclear(&stack_a, free), free(content), NULL);
+        ft_lstadd_back(&stack_a, node);
+        i++;
+    }
+    return (stack_a);
 }

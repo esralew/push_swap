@@ -7,6 +7,7 @@
 
 t_list   *str_to_list(char *input_str);
 //int get_n(char *input_str);
-void    free_2d_arr(char **arr_2d);
+void    ra(t_list **stack_a);
+void    rra(t_list **stack_a);
 
 #endif
