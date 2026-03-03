@@ -7,7 +7,7 @@
 int main(int argc, char **argv)
 {
     t_list *stack_a;
-    //t_list *stack_b;
+    t_list *stack_b;
     t_list  *current;
 
     (void)argc;
@@ -15,7 +15,10 @@ int main(int argc, char **argv)
     stack_a = str_to_list(argv[1]);
     if (!stack_a)
         return (-1); //return ERROR
-    //stack_b = NULL;
+    stack_b = NULL;
+
+    // BEFORE OPERATIONS
+    printf("Stack A:\n");
 
     current = stack_a;
     while (current->next)
@@ -25,23 +28,48 @@ int main(int argc, char **argv)
     }
     printf("%d\n", *((int *) current->content));
 
-    ra(&stack_a);
-    ra(&stack_a);
-    ra(&stack_a);
+    // printf("Stack B:\n");
 
-    rra(&stack_a);
-    rra(&stack_a);
-    //rra(&stack_a);
-    
+    // current = stack_b;
+    // while (current->next)
+    // {
+    //     printf("%d\n", *((int *) current->content));
+    //     current = current->next;
+    // }
+    // printf("%d\n", *((int *) current->content));
+
+    // OPERATIONS //////////////////////////////////
+    pb(&stack_a, &stack_b);
+    pb(&stack_a, &stack_b);
+    pb(&stack_a, &stack_b);
+    rotrot(&stack_a, &stack_b);
+    //pa(&stack_a, &stack_b);
+
+    ////////////////////////////////////////////////
+    printf("\n");
+
+    // AFTER OPERATIONS
+    printf("Stack A:\n");
+
+    current = stack_a;
+    while (current->next)
+    {
+        printf("%d\n", *((int *) current->content));
+        current = current->next;
+    }
+    printf("%d\n", *((int *) current->content));
 
     printf("\n");
 
-    current = stack_a;
+    printf("Stack B:\n");
+
+    current = stack_b;
     while (current->next)
     {
         printf("%d\n", *((int *) current->content));
         current = current->next;
     }
     printf("%d\n", *((int *) current->content));
+
     return (0);
 }
