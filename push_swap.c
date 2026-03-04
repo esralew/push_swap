@@ -9,6 +9,8 @@ int main(int argc, char **argv)
     t_list *stack_a;
     t_list *stack_b;
     t_list  *current;
+    t_list  *next_elem;
+    storage *ops;
 
     (void)argc;
 
@@ -16,6 +18,15 @@ int main(int argc, char **argv)
     if (!stack_a)
         return (-1); //return ERROR
     stack_b = NULL;
+
+    while (ft_lstsize(stack_a) > 3)
+    {
+        ops = get_ops(stack_a, stack_b);
+        perform_ops(stack_a, stack_b, ops);
+    }
+
+    sort_3(&stack_a);
+    shift_back(&stack_a, &stack_a);
 
     // BEFORE OPERATIONS
     printf("Stack A:\n");

@@ -9,6 +9,8 @@ void    rot(t_list **stack)
 {
     t_list  *first;
 
+    if (ft_lstsize(*stack) < 2)
+        return;
     first = *stack;
     *stack = (*stack)->next;
     first->next = NULL;
@@ -26,6 +28,8 @@ void    rrot(t_list **stack)
     t_list  *last;
     t_list  *scnd_last;
 
+    if (ft_lstsize(*stack) < 2)
+        return;
     last = ft_lstlast(*stack);
     scnd_last = ft_lst_scndlast(*stack);
     scnd_last->next = NULL;
