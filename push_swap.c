@@ -11,6 +11,7 @@ int main(int argc, char **argv)
     t_list  *current;
     t_list  *next_elem;
     storage *ops;
+    int op_count;
 
     (void)argc;
 
@@ -19,10 +20,14 @@ int main(int argc, char **argv)
         return (-1); //return ERROR
     stack_b = NULL;
 
+    op_count = 0;
     while (ft_lstsize(stack_a) > 3)
     {
-        ops = get_ops(stack_a, stack_b);
-        perform_ops(stack_a, stack_b, ops);
+        ops = get_next_ops(stack_a, stack_b);
+        if (!ops)
+            return (free_all(stack_a, stack_b), -1); //return ERROR
+        perform_ops(&stack_a, &stack_b, ops);
+        op_count += print_ops(ops);
     }
 
     sort_3(&stack_a);
@@ -84,3 +89,5 @@ int main(int argc, char **argv)
 
     return (0);
 }
+
+//static void free_all()
