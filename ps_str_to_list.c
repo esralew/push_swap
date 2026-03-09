@@ -21,28 +21,6 @@ t_list   *str_to_list(char *input_str)
     return (stack_a);
 }
 
-/*
-int get_n(char *input_str)
-{
-    int	i;
-    int	n;  
-    n = 0;
-    i = 0;
-    while (input_str[i])
-    {
-    	if (input_str[i] == ' ')
-    		i++;
-    	else
-    	{
-    		n++;
-    		while (input_str[i] != ' ' && input_str[i])
-    			i++;
-    	}
-    }
-    return (n);
-}
-*/
-
 static void    free_split_arr(char **split_arr)
 {
     int i;
