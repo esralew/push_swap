@@ -3,7 +3,6 @@
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-#include "libft/libft.h"
 
 t_list   *str_to_list(char *input_str);
 void    rot(t_list **stack);

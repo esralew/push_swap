@@ -1,0 +1,33 @@
+NAME = push_swap
+SRC = push_swap.c ps_str_to_list.c ps_stack_ops.c ps_stack_ops_2.c\
+ps_get_next_ops.c ps_get_next_ops_2.c ps_get_next_ops_3.c
+OBJ = $(SRC:.c=.o) 
+CFLAGS = -Wall -Wextra -Werror
+CC = cc 
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
+INCLUDES = -I./includes -I$(LIBFT_DIR)
+
+all: $(NAME)
+
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+clean: 
+	$(RM) -f $(OBJ)
+	$(MAKE) -C $(LIBFT_DIR) clean
+
+fclean: clean
+	$(RM) -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
+
+re: fclean all
+
+
+

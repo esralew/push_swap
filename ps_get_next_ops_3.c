@@ -57,7 +57,7 @@ t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
     return (next_elem);
 }
 
-t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
-{
-    //
-}
+// t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
+// {
+//     //
+// }

@@ -5,15 +5,15 @@
 
 // if flag gets set to 1, then the next element in stack a will be moved through rotations (upwards travel)
 // if flag stays set to 0, then the next element will be moved through reverse rotations (downwards travel) 
-t_list *get_next_ops(t_list **stack_a, t_list **stack_b)
-{
-    t_list  *current;
-    t_list  *next_elem;
-    t_list  *ops;
+// t_list *get_next_ops(t_list **stack_a, t_list **stack_b)
+// {
+//     t_list  *current;
+//     t_list  *next_elem;
+//     t_list  *ops;
 
-    next_elem = get_next_elem(stack_a, stack_b);
-    ops = get_ops(next_elem, stack_a, stack_b);
-}
+//     next_elem = get_next_elem(stack_a, stack_b);
+//     ops = get_ops(next_elem, stack_a, stack_b);
+// }
 
 int calc_cost(t_list *node, t_list **stack_a, t_list **stack_b)
 {

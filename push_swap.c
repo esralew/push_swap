@@ -20,13 +20,13 @@ int main(int argc, char **argv)
     stack_a = str_to_list(argv[1]);
     if (!stack_a)
         return (-1); //return ERROR
-    stack_b = NULL;
+    stack_b = str_to_list(argv[2]);
 
-    pb(&stack_a, &stack_b);
-    pb(&stack_a, &stack_b);
-    pb(&stack_a, &stack_b);
-    pb(&stack_a, &stack_b);
-    pb(&stack_a, &stack_b);
+    // pb(&stack_a, &stack_b);
+    // pb(&stack_a, &stack_b);
+    // pb(&stack_a, &stack_b);
+    // pb(&stack_a, &stack_b);
+    // pb(&stack_a, &stack_b);
 
     // op_count = 0;
 
@@ -45,7 +45,6 @@ int main(int argc, char **argv)
     current = stack_a;
     while (current->next)
     {
-        //    [Cost in B: %d]
         flag = 0;
         cost_a = calc_cost_a(current, &stack_a, &flag);
         printf("%-6d  [Cost moving to top: %d]    [Cost in B: %d]   [Total Cost: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a), calc_cost(current, &stack_a, &stack_b));
@@ -55,16 +54,18 @@ int main(int argc, char **argv)
     cost_a = calc_cost_a(current, &stack_a, &flag);
     printf("%-6d  [Cost moving to top: %d]    [Cost in B: %d]   [Total Cost: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a), calc_cost(current, &stack_a, &stack_b));
 
-    // printf("Stack B:\n");
+    printf("Stack B:\n");
 
-    // current = stack_b;
-    // while (current->next)
-    // {
-    //     printf("%d\n", *((int *) current->content));
-    //     current = current->next;
-    // }
-    // printf("%d\n", *((int *) current->content));
+    current = stack_b;
+    while (current->next)
+    {
+        printf("%d\n", *((int *) current->content));
+        current = current->next;
+    }
+    printf("%d\n", *((int *) current->content));
 
+    printf("\n");
+    
     // OPERATIONS //////////////////////////////////
     // pb(&stack_a, &stack_b);
     // pb(&stack_a, &stack_b);
@@ -73,6 +74,7 @@ int main(int argc, char **argv)
     printf("top element a: %d\n", *(int *) stack_a->content);
     printf("Successor of top element in a: %d\n", *(int *) (find_succ(stack_a, &stack_b)->content));
     printf("max of A: %d\n", *(int *) find_max(stack_a)->content);
+    printf("Next element to move: %d\n", *(int *) get_next_elem(&stack_a, &stack_b)->content);
 
     ////////////////////////////////////////////////
     printf("\n");
