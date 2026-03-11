@@ -119,14 +119,12 @@ t_list  *find_succ(t_list *node, t_list **stack_b)
     int val_next;
 
     curr = *stack_b;
+    // if no fit for node was found (node is new min or new max), we return the current max as successor
     succ = find_max(*stack_b);
     val_node = *((int *) (node->content));
-    if ((*(int *) ft_lstlast(*stack_b)->content < val_node) && (val_node < *((int *) (curr->content))))
+    // check if node_value is between last element and top element -> if yes, return top element
+    if ((*((int *) (curr->content)) < val_node) && (val_node < *(int *) ft_lstlast(*stack_b)->content))  
         return (curr);
-    // if ((*(int *) node->content) > (*(int *) find_max(*stack_b)->content))
-    //     return (find_max(*stack_b));
-    // else if ((*(int *) node->content) < (*(int *) find_min(*stack_b)->content))
-    //     return (find_max(*stack_b));
     while (1)
     {
         val_curr = *((int *) (curr->content));

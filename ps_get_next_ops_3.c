@@ -11,15 +11,19 @@ t_list  *find_max(t_list *stack)
 
     curr = stack;
     max_val = *(int *) curr->content;
+    max = curr;
+    if (ft_lstsize(stack) < 2)
+        return (max);
+    curr = curr->next;
     while (1)
     {
-        if (!(curr->next))
-            break;
         if (*(int *) curr->content > max_val)
         {
             max_val = *(int *) curr->content;
             max = curr;
         }
+        if (!(curr->next))
+            break;
         curr = curr->next;
     }
     return (max);

@@ -44,13 +44,15 @@ int main(int argc, char **argv)
     current = stack_a;
     while (current->next)
     {
+        //    [Cost in B: %d]
         flag = 0;
         cost_a = calc_cost_a(current, &stack_a, &flag);
-        printf("%d    [Cost moving to top: %d]   [Cost in B: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a));
+        printf("%d    [Cost moving to top: %d]\n", *((int *) current->content), cost_a); // calc_cost_b(current, &stack_b, flag, cost_a));
         current = current->next;
     }
+    flag = 0;
     cost_a = calc_cost_a(current, &stack_a, &flag);
-        printf("%d    [Cost moving to top: %d]   [Cost in B: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a));
+    printf("%d    [Cost moving to top: %d]\n", *((int *) current->content), cost_a); // calc_cost_b(current, &stack_b, flag, cost_a));
 
     // printf("Stack B:\n");
 
