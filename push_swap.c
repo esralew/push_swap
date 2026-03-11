@@ -22,12 +22,6 @@ int main(int argc, char **argv)
         return (-1); //return ERROR
     stack_b = str_to_list(argv[2]);
 
-    // pb(&stack_a, &stack_b);
-    // pb(&stack_a, &stack_b);
-    // pb(&stack_a, &stack_b);
-    // pb(&stack_a, &stack_b);
-    // pb(&stack_a, &stack_b);
-
     // op_count = 0;
 
     // ops = get_next_ops(stack_a, stack_b);
@@ -67,8 +61,7 @@ int main(int argc, char **argv)
     printf("\n");
     
     // OPERATIONS //////////////////////////////////
-    // pb(&stack_a, &stack_b);
-    // pb(&stack_a, &stack_b);
+
     printf("required rotations for top element in stack a: %d\n", get_req_rot(stack_a, &stack_a));
     printf("required rev rotations for top element in stack a: %d\n", get_req_rrot(stack_a, &stack_a));
     printf("top element a: %d\n", *(int *) stack_a->content);

@@ -8,7 +8,7 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I./includes -I$(LIBFT_DIR)
 
-all: $(NAME)
+all: $(NAME) 
 
 $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
@@ -20,11 +20,11 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 clean: 
-	$(RM) -f $(OBJ)
+	rm -f $(OBJ)
 	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	$(RM) -f $(NAME)
+	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
