@@ -1,0 +1,10 @@
+say something about libft in readme
+
+include ft_printf in libft folder and libft makefile
+
+write get_ops()
+
+write perform_ops()
+
+write print_ops()
+
