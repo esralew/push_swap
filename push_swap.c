@@ -26,6 +26,7 @@ int main(int argc, char **argv)
     pb(&stack_a, &stack_b);
     pb(&stack_a, &stack_b);
     pb(&stack_a, &stack_b);
+    pb(&stack_a, &stack_b);
 
     // op_count = 0;
 
@@ -47,12 +48,12 @@ int main(int argc, char **argv)
         //    [Cost in B: %d]
         flag = 0;
         cost_a = calc_cost_a(current, &stack_a, &flag);
-        printf("%d    [Cost moving to top: %d]\n", *((int *) current->content), cost_a); // calc_cost_b(current, &stack_b, flag, cost_a));
+        printf("%-6d  [Cost moving to top: %d]    [Cost in B: %d]   [Total Cost: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a), calc_cost(current, &stack_a, &stack_b));
         current = current->next;
     }
     flag = 0;
     cost_a = calc_cost_a(current, &stack_a, &flag);
-    printf("%d    [Cost moving to top: %d]\n", *((int *) current->content), cost_a); // calc_cost_b(current, &stack_b, flag, cost_a));
+    printf("%-6d  [Cost moving to top: %d]    [Cost in B: %d]   [Total Cost: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a), calc_cost(current, &stack_a, &stack_b));
 
     // printf("Stack B:\n");
 

@@ -5,31 +5,15 @@
 
 // if flag gets set to 1, then the next element in stack a will be moved through rotations (upwards travel)
 // if flag stays set to 0, then the next element will be moved through reverse rotations (downwards travel) 
-// t_list *get_next_ops(t_list **stack_a, t_list **stack_b)
-// {
-//     t_list  *current;
-//     t_list  *next_elem;
-//     t_list  *first;
-//     int min_cost;
+t_list *get_next_ops(t_list **stack_a, t_list **stack_b)
+{
+    t_list  *current;
+    t_list  *next_elem;
+    t_list  *ops;
 
-//     current = NULL;
-//     first = *stack_a;
-//     // wenn zuviele lines, dann hier workaround mit min_cost = INT_MAX
-//     min_cost = calc_cost(first, stack_a, stack_b);
-//     next_elem = first;
-//     if (first->next)
-//         current = first->next;
-//     while ((current)->next)
-//     {
-//         if (calc_cost(current, stack_a, stack_b) < min_cost)
-//         {
-//             min_cost = calc_cost(current, stack_a, stack_b);
-//             next_elem = current;
-//         }
-//         current = current->next;
-//     }
-//     return (store_ops(next_elem));
-// }
+    next_elem = get_next_elem(stack_a, stack_b);
+    ops = get_ops(next_elem, stack_a, stack_b);
+}
 
 int calc_cost(t_list *node, t_list **stack_a, t_list **stack_b)
 {
@@ -37,10 +21,10 @@ int calc_cost(t_list *node, t_list **stack_a, t_list **stack_b)
     int cost_b;
     int flag;
 
-    cost_a = calc_cost_a(node, stack_a, &flag);
     flag = 0;
+    cost_a = calc_cost_a(node, stack_a, &flag);
     cost_b = calc_cost_b(node, stack_b, flag, cost_a);
-    return (cost_a + cost_b);
+    return (cost_a + cost_b + 1);
 }
 
 int calc_cost_a(t_list *node, t_list **stack_a, int *flag)
@@ -80,35 +64,6 @@ int calc_cost_b(t_list *node, t_list **stack_b, int flag, int cost_a)
     else
         return (cost_opp);
 }
-
-// t_list  *find_succ(t_list *node, t_list **stack_b)
-// {
-//     t_list  *succ;
-//     t_list  *curr;
-//     int closest;
-//     int diff;
-
-//     curr = *stack_b;
-//     // val_node = *((int *) (node->content));
-//     // val_curr = *((int *) (curr->content));
-//     succ = NULL;
-//     while ((curr->next) && (*((int *) (node->content)) < *((int *) (curr->content))))
-//         curr = curr->next;
-//     diff = abs(*((int *) (node->content)) - *((int *) (curr->content)));
-//     closest = diff;
-//     succ = curr;
-//     while (curr->next)
-//     {
-//         diff = abs(*((int *) (node->content)) - *((int *) (curr->content)));
-//         if ((*((int *) (curr->content)) < *((int *) (node->content))) && diff < closest)
-//         {
-//             closest = diff;
-//             succ = curr;
-//         }
-//         curr = curr->next;
-//     }
-//     return (succ);
-// }
 
 t_list  *find_succ(t_list *node, t_list **stack_b)
 {

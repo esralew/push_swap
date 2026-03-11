@@ -28,3 +28,36 @@ t_list  *find_max(t_list *stack)
     }
     return (max);
 }
+
+t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
+{
+    t_list  *curr;
+    t_list  *first;
+    t_list  *next_elem;
+    int min_cost;
+
+    curr = NULL;
+    first = *stack_a;
+    // wenn zuviele lines, dann hier workaround mit min_cost = INT_MAX
+    min_cost = calc_cost(first, stack_a, stack_b);
+    next_elem = first;
+    if (first->next)
+        curr = first->next;
+    while ((curr)->next)
+    {
+        if (calc_cost(curr, stack_a, stack_b) < min_cost)
+        {
+            min_cost = calc_cost(curr, stack_a, stack_b);
+            next_elem = curr;
+        }
+        curr = curr->next;
+    }
+    if (calc_cost(curr, stack_a, stack_b) < min_cost)
+        next_elem = curr;
+    return (next_elem);
+}
+
+t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
+{
+    //
+}
