@@ -41,7 +41,7 @@ int calc_cost_sync(int flag,int cost_a,int req_rot_b,int req_rrot_b)
         return (cost_sync);
 }
 
-int calc_cost_opp(int flag,int cost_a,int req_rot_b,int req_rrot_b)
+int calc_cost_opp(int flag, int req_rot_b,int req_rrot_b)
 {
     int cost_opp;
     

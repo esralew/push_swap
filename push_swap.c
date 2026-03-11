@@ -9,9 +9,11 @@ int main(int argc, char **argv)
     t_list *stack_a;
     t_list *stack_b;
     t_list  *current;
-    t_list  *ops;
+    // t_list  *ops;
     // storage *ops;
     // int op_count;
+    int flag;
+    int cost_a;
 
     (void)argc;
 
@@ -19,6 +21,11 @@ int main(int argc, char **argv)
     if (!stack_a)
         return (-1); //return ERROR
     stack_b = NULL;
+
+    pb(&stack_a, &stack_b);
+    pb(&stack_a, &stack_b);
+    pb(&stack_a, &stack_b);
+    pb(&stack_a, &stack_b);
 
     // op_count = 0;
 
@@ -37,10 +44,13 @@ int main(int argc, char **argv)
     current = stack_a;
     while (current->next)
     {
-        printf("%d\n", *((int *) current->content));
+        flag = 0;
+        cost_a = calc_cost_a(current, &stack_a, &flag);
+        printf("%d    [Cost moving to top: %d]   [Cost in B: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a));
         current = current->next;
     }
-    printf("%d\n", *((int *) current->content));
+    cost_a = calc_cost_a(current, &stack_a, &flag);
+        printf("%d    [Cost moving to top: %d]   [Cost in B: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a));
 
     // printf("Stack B:\n");
 
@@ -53,11 +63,13 @@ int main(int argc, char **argv)
     // printf("%d\n", *((int *) current->content));
 
     // OPERATIONS //////////////////////////////////
-    pb(&stack_a, &stack_b);
-    pb(&stack_a, &stack_b);
-    pb(&stack_a, &stack_b);
-    printf("required rotations for ")
-    //pa(&stack_a, &stack_b);
+    // pb(&stack_a, &stack_b);
+    // pb(&stack_a, &stack_b);
+    printf("required rotations for top element in stack a: %d\n", get_req_rot(stack_a, &stack_a));
+    printf("required rev rotations for top element in stack a: %d\n", get_req_rrot(stack_a, &stack_a));
+    printf("top element a: %d\n", *(int *) stack_a->content);
+    printf("Successor of top element in a: %d\n", *(int *) (find_succ(stack_a, &stack_b)->content));
+    printf("max of A: %d\n", *(int *) find_max(stack_a)->content);
 
     ////////////////////////////////////////////////
     printf("\n");

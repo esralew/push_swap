@@ -7,7 +7,7 @@ void    pa(t_list **stack_a, t_list **stack_b)
 {
     t_list  *top_b;
 
-    if (ft_lstsize(stack_b) < 1)
+    if (ft_lstsize(*stack_b) < 1)
         return;
     top_b = *stack_b;
     *stack_b = (*stack_b)->next;
@@ -18,7 +18,7 @@ void    pb(t_list **stack_a, t_list **stack_b)
 {
     t_list  *top_a;
 
-    if (ft_lstsize(stack_a) < 1)
+    if (ft_lstsize(*stack_a) < 1)
         return;
     top_a = *stack_a;
     *stack_a = (*stack_a)->next;
