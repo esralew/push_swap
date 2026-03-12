@@ -43,7 +43,7 @@ t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
     next_elem = first;
     if (first->next)
         curr = first->next;
-    while ((curr)->next)
+    while (curr->next)
     {
         if (calc_cost(curr, stack_a, stack_b) < min_cost)
         {
@@ -57,7 +57,67 @@ t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
     return (next_elem);
 }
 
-// t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
-// {
-//     //
-// }
+t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
+{
+    t_list  *command_list;
+    t_list  *node;
+    int flag;
+    char    *command;
+
+    flag = 0;
+    //////////////////////////////
+    command_list = get_ops_a(node, stack_a, &flag);
+    ft_lstadd_back(&command_list, get_ops_b)
+    //////////////////////////////////
+}
+
+// if flag is still 0 after call of calc_cost_a, then we do normal rotations 
+t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag)
+{
+    t_list  *node;
+    t_list  *command_list;
+    int num;
+    char    *command;
+    int cost_a;
+    
+    command_list = NULL;
+    cost_a = calc_cost_a(node, stack_a, flag);
+    num = cost_a;
+    while (num > 0)
+    {
+        if (!flag)
+            command = ft_strdup("ra");
+        else
+            command = ft_strdup("rra");
+        if (!command)
+            return (ft_lstclear(command_list, free), NULL);
+        node = ft_lstnew(command);
+        ft_lstadd_back(&command_list, node);
+    }
+}
+
+t_list  *get_ops_b(t_list *node, t_list **stack_b, int flag)
+{
+    t_list  *node;
+    t_list  *command_list;
+    int num;
+    char    *command;
+    int cost_b;
+    
+    command_list = NULL;
+    //////////////////////////////////
+    cost_b = calc_cost_b(node, stack_b, flag, calc_cost_a(node, ) );
+    //////////////////////////////////
+    num = cost_a;
+    while (num > 0)
+    {
+        if (!flag)
+            command = ft_strdup("ra");
+        else
+            command = ft_strdup("rra");
+        if (!command)
+            return (ft_lstclear(command_list, free), NULL);
+        node = ft_lstnew(command);
+        ft_lstadd_back(&command_list, node);
+    }
+}

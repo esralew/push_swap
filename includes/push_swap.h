@@ -24,5 +24,6 @@ int calc_cost_opp(int flag, int req_rot_b,int req_rrot_b);
 int abs(int x);
 t_list  *find_max(t_list *stack);
 t_list  *get_next_elem(t_list **stack_a, t_list **stack_b);
+t_list  *get_ops_a(t_list *node, t_list **stack_a, t_list **stack_b);
 
 #endif
