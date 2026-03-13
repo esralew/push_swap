@@ -60,14 +60,21 @@ t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
 t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
 {
     t_list  *command_list;
+    t_list  *b_list;
     t_list  *node;
     int flag;
-    char    *command;
 
     flag = 0;
     //////////////////////////////
     command_list = get_ops_a(node, stack_a, &flag);
-    ft_lstadd_back(&command_list, get_ops_b)
+    if (!command_list)
+        return (NULL);
+    b_list = get_ops_b(node, &stack_a, &stack_b, flag);
+    if (!b_list)
+        return (ft_lstclear(command_list, free), NULL);
+    ft_lstadd_back(&command_list, b_list);
+    optimize_command_list(&command_list, node, stack_a, stack_b);
+    return (command_list);
     //////////////////////////////////
 }
 
@@ -76,48 +83,39 @@ t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag)
 {
     t_list  *node;
     t_list  *command_list;
-    int num;
-    char    *command;
     int cost_a;
+    char    *command;
     
     command_list = NULL;
     cost_a = calc_cost_a(node, stack_a, flag);
-    num = cost_a;
-    while (num > 0)
+    while (cost_a > 0)
     {
-        if (!flag)
+        if (!(*flag))
             command = ft_strdup("ra");
         else
             command = ft_strdup("rra");
         if (!command)
             return (ft_lstclear(command_list, free), NULL);
         node = ft_lstnew(command);
+        if (!node)
+            return (ft_lstclear(command_list, free), free(command), NULL);
         ft_lstadd_back(&command_list, node);
+        cost_a--;
     }
+    return (command_list);
 }
 
-t_list  *get_ops_b(t_list *node, t_list **stack_b, int flag)
-{
-    t_list  *node;
-    t_list  *command_list;
-    int num;
-    char    *command;
-    int cost_b;
-    
-    command_list = NULL;
-    //////////////////////////////////
-    cost_b = calc_cost_b(node, stack_b, flag, calc_cost_a(node, ) );
-    //////////////////////////////////
-    num = cost_a;
-    while (num > 0)
-    {
-        if (!flag)
-            command = ft_strdup("ra");
-        else
-            command = ft_strdup("rra");
-        if (!command)
-            return (ft_lstclear(command_list, free), NULL);
-        node = ft_lstnew(command);
-        ft_lstadd_back(&command_list, node);
-    }
-}
+// void    optimize_command_list(t_list **command_list, t_list *node, t_list **stack_a, t_list **stack_b)
+// {
+//     t_list  *curr;
+//     int flag;
+//     int cost_a;
+//     int cost_b;
+
+//     flag = 0;
+//     cost_a = calc_cost_a(node, stack_a, &flag);
+//     cost_b = calc_cost_b(node, stack_b, flag, cost_a);
+//     if (cost_a >= cost_b)
+
+//         ///////////////////////////////////////
+// }
