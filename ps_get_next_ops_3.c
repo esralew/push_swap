@@ -61,7 +61,7 @@ t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
 {
     t_list  *command_list;
     t_list  *b_list;
-    t_list  *node;
+    t_list  *push;
     int flag;
 
     flag = 0;
@@ -69,37 +69,49 @@ t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
     command_list = get_ops_a(node, stack_a, &flag);
     if (!command_list)
         return (NULL);
-    b_list = get_ops_b(node, &stack_a, &stack_b, flag);
+    b_list = get_ops_b(node, stack_a, stack_b, flag);
     if (!b_list)
-        return (ft_lstclear(command_list, free), NULL);
+        return (ft_lstclear(&command_list, free), NULL);
     ft_lstadd_back(&command_list, b_list);
-    optimize_command_list(&command_list, node, stack_a, stack_b);
+    // optimize_command_list(&command_list, node, stack_a, stack_b);
+    push = ft_lstnew("pb");
+    if (!push)
+        return (ft_lstclear(&command_list, free), NULL);
+    ft_lstadd_back(&command_list, push);
     return (command_list);
     //////////////////////////////////
 }
 
 // if flag is still 0 after call of calc_cost_a, then we do normal rotations 
+// Purpose of command_cpy: see function build_list() in ps_get_next_ops_4.c
 t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag)
 {
-    t_list  *node;
+    t_list  *next;
     t_list  *command_list;
     int cost_a;
     char    *command;
+    char    *command_cpy;
     
     command_list = NULL;
     cost_a = calc_cost_a(node, stack_a, flag);
+    if (cost_a == 0)
+        return (insert_dummy());
+    if (!(*flag))
+        command = ft_strdup("ra");
+    else
+        command = ft_strdup("rra");
+    if (!command)
+        return (ft_lstclear(&command_list, free), NULL);
     while (cost_a > 0)
     {
-        if (!(*flag))
-            command = ft_strdup("ra");
-        else
-            command = ft_strdup("rra");
-        if (!command)
-            return (ft_lstclear(command_list, free), NULL);
-        node = ft_lstnew(command);
-        if (!node)
-            return (ft_lstclear(command_list, free), free(command), NULL);
-        ft_lstadd_back(&command_list, node);
+    // in case of norminette problems we can substitute with static function build_list() from other file here
+        command_cpy = ft_strdup(command);
+        if (!command_cpy)
+            return (ft_lstclear(&command_list, free), NULL);
+        next = ft_lstnew(command_cpy);
+        if (!next)
+            return (ft_lstclear(&command_list, free), free(command), NULL);
+        ft_lstadd_back(&command_list, next);
         cost_a--;
     }
     return (command_list);

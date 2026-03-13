@@ -10,7 +10,8 @@ int main(int argc, char **argv)
     t_list *stack_b;
     t_list  *current;
     // t_list  *ops;
-    // storage *ops;
+    t_list  *ops_b;
+    // t_list  *ops_b;
     // int op_count;
     int flag;
     int cost_a;
@@ -48,6 +49,8 @@ int main(int argc, char **argv)
     cost_a = calc_cost_a(current, &stack_a, &flag);
     printf("%-6d  [Cost moving to top: %d]    [Cost in B: %d]   [Total Cost: %d]\n", *((int *) current->content), cost_a, calc_cost_b(current, &stack_b, flag, cost_a), calc_cost(current, &stack_a, &stack_b));
 
+    printf("\n");
+
     printf("Stack B:\n");
 
     current = stack_b;
@@ -68,6 +71,23 @@ int main(int argc, char **argv)
     printf("Successor of top element in a: %d\n", *(int *) (find_succ(stack_a, &stack_b)->content));
     printf("max of A: %d\n", *(int *) find_max(stack_a)->content);
     printf("Next element to move: %d\n", *(int *) get_next_elem(&stack_a, &stack_b)->content);
+    flag = 0;
+    // ops_a = get_ops_a(get_next_elem(&stack_a, &stack_b), &stack_a, &flag);
+    ops_b = get_ops_b(get_next_elem(&stack_a, &stack_b), &stack_a, &stack_b,flag);
+
+    printf("\n");
+
+    printf("Operations required to move 'next element to move': \n");
+
+    current = ops_b;
+    // while (current->next)
+    // {
+    //     printf("%s\n", (char *) current->content);
+    //     current = current->next;
+    // }
+    // printf("%s\n", (char *) current->content);
+
+    printf("\n");
 
     ////////////////////////////////////////////////
     printf("\n");
