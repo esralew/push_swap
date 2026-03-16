@@ -69,9 +69,12 @@ t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
     command_list = get_ops_a(node, stack_a, &flag);
     if (!command_list)
         return (NULL);
+    // dummy deletion in both a_lst and b_lst can be moved into the get_ops_... functions probably (get_ops_a needs to be broken into subroutines anyway)
+    ft_lstdel_front(&command_list, free);
     b_list = get_ops_b(node, stack_a, stack_b, flag);
     if (!b_list)
         return (ft_lstclear(&command_list, free), NULL);
+    ft_lstdel_front(&b_list, free);
     ft_lstadd_back(&command_list, b_list);
     // optimize_command_list(&command_list, node, stack_a, stack_b);
     push = ft_lstnew("pb");
@@ -92,10 +95,8 @@ t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag)
     char    *command;
     char    *command_cpy;
     
-    command_list = NULL;
+    command_list = insert_dummy();
     cost_a = calc_cost_a(node, stack_a, flag);
-    if (cost_a == 0)
-        return (insert_dummy());
     if (!(*flag))
         command = ft_strdup("ra");
     else

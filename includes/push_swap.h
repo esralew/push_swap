@@ -29,5 +29,6 @@ t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag);
 t_list  *get_ops_b(t_list *node,t_list **stack_a, t_list **stack_b, int flag);
 void    optimize_command_list(t_list **command_list, t_list *node, t_list **stack_a, t_list **stack_b);
 t_list  *insert_dummy(void);
+void    ft_lstdel_front(t_list **lst, void (*del)(void *));
 
 #endif

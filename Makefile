@@ -2,7 +2,7 @@ NAME = push_swap
 SRC = push_swap.c ps_str_to_list.c ps_stack_ops.c ps_stack_ops_2.c\
 ps_get_next_ops.c ps_get_next_ops_2.c ps_get_next_ops_3.c ps_get_next_ops_4.c
 OBJ = $(SRC:.c=.o) 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -O0
 CC = cc 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a

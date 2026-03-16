@@ -10,8 +10,8 @@ int main(int argc, char **argv)
     t_list *stack_b;
     t_list  *current;
     // t_list  *ops;
+    // t_list  *ops_a;
     t_list  *ops_b;
-    // t_list  *ops_b;
     // int op_count;
     int flag;
     int cost_a;
@@ -77,15 +77,27 @@ int main(int argc, char **argv)
 
     printf("\n");
 
-    printf("Operations required to move 'next element to move': \n");
+    // printf("Operations required to move 'next element to move (in a)': \n");
 
-    current = ops_b;
+    // current = ops_a;
     // while (current->next)
     // {
     //     printf("%s\n", (char *) current->content);
     //     current = current->next;
     // }
     // printf("%s\n", (char *) current->content);
+
+    // printf("\n");
+
+     printf("Operations required to move 'next element to move (in b)': \n");
+
+    current = ops_b;
+    while (current->next)
+    {
+        printf("%s\n", (char *) current->content);
+        current = current->next;
+    }
+    printf("%s\n", (char *) current->content);
 
     printf("\n");
 

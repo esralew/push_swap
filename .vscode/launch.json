@@ -1,14 +1,25 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Debug a.out",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/a.out",
-      "cwd": "${workspaceFolder}",
-      "stopAtEntry": false,
-      "MIMode": "gdb"
-    }
-  ]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug push_swap",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/push_swap",
+            "args": ["12 14 87 -44 -82 5 -9 23", "90 34 0 -47 -53"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
 }
