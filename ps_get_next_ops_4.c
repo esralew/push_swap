@@ -3,7 +3,7 @@
 
 #include "push_swap.h"
 
-// static t_list   *build_list(char *command, int iter);
+static t_list   *build_list(char *command, int iter);
 
 // t_list  *get_ops_b(t_list *node,t_list **stack_a, t_list **stack_b, int flag)
 // {
@@ -44,7 +44,7 @@ t_list  *get_ops_b(t_list *node,t_list **stack_a, t_list **stack_b, int flag)
     int req_rot_b;
     int req_rrot_b;
     char    *command;
-    // int iter;
+    int iter;
     
     ///////////////////////////////////////////////////NORMINETTE + SEG FAULT
     cost_a = calc_cost_a(node, stack_a, &flag);
@@ -54,53 +54,60 @@ t_list  *get_ops_b(t_list *node,t_list **stack_a, t_list **stack_b, int flag)
     cost_opp = calc_cost_opp(flag, req_rot_b, req_rrot_b);
     if (((!flag) && (cost_sync <= cost_opp)) || ((flag) && (cost_sync > cost_opp))) 
     {
-        // iter = req_rot_b;
+        iter = req_rot_b;
         command = ft_strdup("rb");
     }
     else
     {
-        // iter = req_rrot_b;
+        iter = req_rrot_b;
         command = ft_strdup("rrb");
     }
     if (!command)
         return (NULL);
-    // b_list = build_list(command, iter);
-    // if (!b_list)
-    //     return (free(command), NULL);
-    b_list = insert_dummy();
-    return (b_list);
+    b_list = build_list(command, iter);
+    if (!b_list)
+         return (free(command), NULL);
+    return (free(command), b_list);
 }
 
 // having the nodes of the list contain COPIES of the command string is important, because if 
 // they all point to the same string in memory, then a ft_lstclear(..., free) would call double-frees
-// static t_list   *build_list(char *command, int iter)
-// {
-//     t_list  *node;
-//     t_list  *b_list;
-//     char  *command_cpy;
+static t_list   *build_list(char *command, int iter)
+{
+    t_list  *new;
+    t_list  *b_list;
+    char  *command_cpy;
 
-//     b_list = insert_dummy();
-//     while (iter > 0)
-//     {
-//         command_cpy = ft_strdup(command);
-//         if (!command_cpy)
-//             return (ft_lstclear(&b_list, free), NULL);
-//         node = ft_lstnew(command_cpy);
-//         if (!node)
-//             return (ft_lstclear(&b_list, free),free(command_cpy), NULL);
-//         ft_lstadd_back(&b_list, node);
-//         iter--;
-//     }
-//     return (b_list);
-// }
+    b_list = insert_dummy();
+    if (!b_list)
+        return (NULL);
+    while (iter > 0)
+    {
+        command_cpy = ft_strdup(command);
+        if (!command_cpy)
+            return (ft_lstclear(&b_list, free), NULL);
+        new = ft_lstnew(command_cpy);
+        if (!new)
+            return (ft_lstclear(&b_list, free),free(command_cpy), NULL);
+        ft_lstadd_back(&b_list, new);
+        iter--;
+    }
+    return (b_list);
+}
 
 // function to add a dummy node, that will be added by get_ops_a and get_ops_b, in case that no regular node had to be added (NULL return not possible, 
 // because possibility to distinguish allocation fails is necessary)
 t_list  *insert_dummy(void)
 {
     t_list  *dummy;
-
-    dummy = ft_lstnew("dummy");
+    char    *dummy_str;
+    
+    dummy_str = ft_strdup("dummy");
+    if (!dummy_str)
+        return (NULL);
+    dummy = ft_lstnew(dummy_str);
+    if (!dummy)
+        return (free(dummy_str), NULL);
     return (dummy);
 }
 
