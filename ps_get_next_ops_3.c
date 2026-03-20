@@ -119,17 +119,25 @@ t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag)
     return (command_list);
 }
 
-// void    optimize_command_list(t_list **command_list, t_list *node, t_list **stack_a, t_list **stack_b)
-// {
-//     t_list  *curr;
-//     int flag;
-//     int cost_a;
-//     int cost_b;
+void    optimize_command_list(t_list **command_list, t_list *node, t_list **stack_a, t_list **stack_b)
+{
+    t_list  *curr;
+    int num_ops_a;
+    int num_ops_b;
 
-//     flag = 0;
-//     cost_a = calc_cost_a(node, stack_a, &flag);
-//     cost_b = calc_cost_b(node, stack_b, flag, cost_a);
-//     if (cost_a >= cost_b)
-
-//         ///////////////////////////////////////
-// }
+    curr = *command_list;
+    while (curr->next)
+    {
+        if (*(char *) curr->content == "ra" || *(char *) curr->content == "rra")
+            num_ops_a++;
+        else
+            num_ops_b++;
+        curr = curr->next;
+    }
+    if (*(char *) curr->content == "ra" || *(char *) curr->content == "rra")
+        num_ops_a++;
+    else
+        num_ops_b++;
+    
+        ///////////////////////////////////////
+}
