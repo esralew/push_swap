@@ -3,32 +3,6 @@
 
 #include "push_swap.h"
 
-t_list  *find_max(t_list *stack)
-{
-    t_list *curr;
-    t_list  *max;
-    int max_val;
-
-    curr = stack;
-    max_val = *(int *) curr->content;
-    max = curr;
-    if (ft_lstsize(stack) < 2)
-        return (max);
-    curr = curr->next;
-    while (1)
-    {
-        if (*(int *) curr->content > max_val)
-        {
-            max_val = *(int *) curr->content;
-            max = curr;
-        }
-        if (!(curr->next))
-            break;
-        curr = curr->next;
-    }
-    return (max);
-}
-
 t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
 {
     t_list  *curr;
@@ -57,7 +31,7 @@ t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
     return (next_elem);
 }
 
-t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
+t_list  *get_ops(t_list *next_elem, t_list **stack_a, t_list **stack_b)
 {
     t_list  *command_list;
     t_list  *b_list;
@@ -66,11 +40,11 @@ t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
 
     flag = 0;
     //////////////////////////////
-    command_list = get_ops_a(node, stack_a, &flag);
+    command_list = get_ops_a(next_elem, stack_a, &flag);
     if (!command_list)
         return (NULL);
     ft_lstdel_front(&command_list, free);
-    b_list = get_ops_b(node, stack_a, stack_b, flag);
+    b_list = get_ops_b(next_elem, stack_a, stack_b, flag);
     if (!b_list)
         return (ft_lstclear(&command_list, free), NULL);
     ft_lstdel_front(&b_list, free);
@@ -86,9 +60,9 @@ t_list  *get_ops(t_list *node, t_list **stack_a, t_list **stack_b)
 
 // if flag is still 0 after call of calc_cost_a, then we do normal rotations 
 // Purpose of command_cpy: see function build_list() in ps_get_next_ops_4.c
-t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag)
+t_list  *get_ops_a(t_list *next_elem, t_list **stack_a, int *flag)
 {
-    t_list  *next;
+    t_list  *new;
     t_list  *command_list;
     int cost_a;
     char    *command;
@@ -97,7 +71,7 @@ t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag)
     command_list = insert_dummy();
     if (!command_list)
         return (NULL);
-    cost_a = calc_cost_a(node, stack_a, flag);
+    cost_a = calc_cost_a(next_elem, stack_a, flag);
     if (!(*flag))
         command = ft_strdup("ra");
     else
@@ -110,34 +84,38 @@ t_list  *get_ops_a(t_list *node, t_list **stack_a, int *flag)
         command_cpy = ft_strdup(command);
         if (!command_cpy)
             return (ft_lstclear(&command_list, free), NULL);
-        next = ft_lstnew(command_cpy);
-        if (!next)
+        new = ft_lstnew(command_cpy);
+        if (!new)
             return (ft_lstclear(&command_list, free), free(command), NULL);
-        ft_lstadd_back(&command_list, next);
+        ft_lstadd_back(&command_list, new);
         cost_a--;
     }
     return (command_list);
 }
 
-void    optimize_command_list(t_list **command_list, t_list *node, t_list **stack_a, t_list **stack_b)
+// function to add a dummy node, that will be added by get_ops_a and get_ops_b, in case that no regular node had to be added (NULL return not possible, 
+// because possibility to distinguish allocation fails is necessary)
+t_list  *insert_dummy(void)
 {
-    t_list  *curr;
-    int num_ops_a;
-    int num_ops_b;
-
-    curr = *command_list;
-    while (curr->next)
-    {
-        if (*(char *) curr->content == "ra" || *(char *) curr->content == "rra")
-            num_ops_a++;
-        else
-            num_ops_b++;
-        curr = curr->next;
-    }
-    if (*(char *) curr->content == "ra" || *(char *) curr->content == "rra")
-        num_ops_a++;
-    else
-        num_ops_b++;
+    t_list  *dummy;
+    char    *dummy_str;
     
-        ///////////////////////////////////////
+    dummy_str = ft_strdup("dummy");
+    if (!dummy_str)
+        return (NULL);
+    dummy = ft_lstnew(dummy_str);
+    if (!dummy)
+        return (free(dummy_str), NULL);
+    return (dummy);
+}
+
+void    ft_lstdel_front(t_list **lst, void (*del)(void *))
+{
+    t_list  *tmp;
+
+    if (!lst || !(*lst))
+        return; 
+    tmp = *lst;
+    *lst = (*lst)->next;
+    ft_lstdelone(tmp, del);
 }

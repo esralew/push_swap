@@ -5,7 +5,7 @@
 
 static t_list   *build_list(char *command, int iter);
 
-t_list  *get_ops_b(t_list *node,t_list **stack_a, t_list **stack_b, int flag)
+t_list  *get_ops_b(t_list *next_elem,t_list **stack_a, t_list **stack_b, int flag)
 {
     t_list  *b_list;
     int cost_a;
@@ -17,9 +17,9 @@ t_list  *get_ops_b(t_list *node,t_list **stack_a, t_list **stack_b, int flag)
     int iter;
     
     ///////////////////////////////////////////////////NORMINETTE
-    cost_a = calc_cost_a(node, stack_a, &flag);
-    req_rot_b = get_req_rot(find_succ(node, stack_b), stack_b);
-    req_rrot_b = get_req_rrot(find_succ(node, stack_b), stack_b);
+    cost_a = calc_cost_a(next_elem, stack_a, &flag);
+    req_rot_b = get_req_rot(find_succ(next_elem, stack_b), stack_b);
+    req_rrot_b = get_req_rrot(find_succ(next_elem, stack_b), stack_b);
     cost_sync = calc_cost_sync(flag, cost_a, req_rot_b, req_rrot_b);
     cost_opp = calc_cost_opp(flag, req_rot_b, req_rrot_b);
     if (((!flag) && (cost_sync <= cost_opp)) || ((flag) && (cost_sync > cost_opp))) 
@@ -65,29 +65,30 @@ static t_list   *build_list(char *command, int iter)
     return (b_list);
 }
 
-// function to add a dummy node, that will be added by get_ops_a and get_ops_b, in case that no regular node had to be added (NULL return not possible, 
-// because possibility to distinguish allocation fails is necessary)
-t_list  *insert_dummy(void)
+t_list  *find_max(t_list *stack)
 {
-    t_list  *dummy;
-    char    *dummy_str;
-    
-    dummy_str = ft_strdup("dummy");
-    if (!dummy_str)
-        return (NULL);
-    dummy = ft_lstnew(dummy_str);
-    if (!dummy)
-        return (free(dummy_str), NULL);
-    return (dummy);
+    t_list *curr;
+    t_list  *max;
+    int max_val;
+
+    curr = stack;
+    max_val = *(int *) curr->content;
+    max = curr;
+    if (ft_lstsize(stack) < 2)
+        return (max);
+    curr = curr->next;
+    while (1)
+    {
+        if (*(int *) curr->content > max_val)
+        {
+            max_val = *(int *) curr->content;
+            max = curr;
+        }
+        if (!(curr->next))
+            break;
+        curr = curr->next;
+    }
+    return (max);
 }
 
-void    ft_lstdel_front(t_list **lst, void (*del)(void *))
-{
-    t_list  *tmp;
-
-    if (!lst || !(*lst))
-        return; 
-    tmp = *lst;
-    *lst = (*lst)->next;
-    ft_lstdelone(tmp, del);
-}
+// HIER PLATZ FÜR HILFSFUNKTIONEN DIE DURCH GET OPS B NORMINETTE ENTSTEHEN
