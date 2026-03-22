@@ -3,8 +3,6 @@
 
 #include "push_swap.h"
 
-static t_list	*ft_lst_scndlast(t_list *lst);
-
 void    rot(t_list **stack)
 {
     t_list  *first;
@@ -42,7 +40,7 @@ void    rrotrrot(t_list **stack_a, t_list **stack_b)
     rrot(stack_b);
 }
 
-static t_list	*ft_lst_scndlast(t_list *lst)
+t_list	*ft_lst_scndlast(t_list *lst)
 {
 	t_list	*current;
 

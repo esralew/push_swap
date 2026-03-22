@@ -33,28 +33,35 @@ t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
 
 t_list  *get_ops(t_list *next_elem, t_list **stack_a, t_list **stack_b)
 {
-    t_list  *command_list;
+    t_list  *comm_lst;
+    t_list  *fin_comm_lst;
     t_list  *b_list;
     t_list  *push;
     int flag;
+    char    *pb;
 
     flag = 0;
     //////////////////////////////
-    command_list = get_ops_a(next_elem, stack_a, &flag);
-    if (!command_list)
+    comm_lst = get_ops_a(next_elem, stack_a, &flag);
+    if (!comm_lst)
         return (NULL);
-    ft_lstdel_front(&command_list, free);
+    ft_lstdel_front(&comm_lst, free);
     b_list = get_ops_b(next_elem, stack_a, stack_b, flag);
     if (!b_list)
-        return (ft_lstclear(&command_list, free), NULL);
+        return (ft_lstclear(&comm_lst, free), NULL);
     ft_lstdel_front(&b_list, free);
-    ft_lstadd_back(&command_list, b_list);
-    // optimize_command_list(&command_list, node, stack_a, stack_b);
-    push = ft_lstnew("pb");
+    ft_lstadd_back(&comm_lst, b_list);
+    fin_comm_lst = opt_comm_lst(&comm_lst);
+    if (!(fin_comm_lst))
+        return (ft_lstclear(&comm_lst, free), NULL);
+    pb = ft_strdup ("pb");
+    if (!pb)
+        return (ft_lstclear(&fin_comm_lst, free), NULL);
+    push = ft_lstnew(pb);
     if (!push)
-        return (ft_lstclear(&command_list, free), NULL);
-    ft_lstadd_back(&command_list, push);
-    return (command_list);
+        return (ft_lstclear(&fin_comm_lst, free), NULL);
+    ft_lstadd_back(&fin_comm_lst, push);
+    return (fin_comm_lst);
     //////////////////////////////////
 }
 
@@ -90,7 +97,7 @@ t_list  *get_ops_a(t_list *next_elem, t_list **stack_a, int *flag)
         ft_lstadd_back(&command_list, new);
         cost_a--;
     }
-    return (command_list);
+    return (free(command), command_list);
 }
 
 // function to add a dummy node, that will be added by get_ops_a and get_ops_b, in case that no regular node had to be added (NULL return not possible, 
@@ -118,4 +125,16 @@ void    ft_lstdel_front(t_list **lst, void (*del)(void *))
     tmp = *lst;
     *lst = (*lst)->next;
     ft_lstdelone(tmp, del);
+}
+
+void    ft_lstdel_back(t_list **lst, void (*del)(void *))
+{
+    t_list  *tmp;
+
+    if (!lst || !(*lst))
+        return; 
+    tmp = ft_lst_scndlast(*lst);
+    ft_lstdelone(tmp->next, del);
+    tmp->next = NULL;
+
 }

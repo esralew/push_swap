@@ -12,7 +12,6 @@ int main(int argc, char **argv)
     t_list  *ops;
     t_list  *ops_a;
     t_list  *ops_b;
-    // int op_count;
     int flag;
     int cost_a;
 
@@ -65,8 +64,8 @@ int main(int argc, char **argv)
     
     // OPERATIONS //////////////////////////////////
 
-    printf("required rotations for top element in stack a: %d\n", get_req_rot(stack_a, &stack_a));
-    printf("required rev rotations for top element in stack a: %d\n", get_req_rrot(stack_a, &stack_a));
+    // printf("required rotations for top element in stack a: %d\n", get_req_rot(stack_a, &stack_a));
+    // printf("required rev rotations for top element in stack a: %d\n", get_req_rrot(stack_a, &stack_a));
     printf("top element a: %d\n", *(int *) stack_a->content);
     printf("Successor of top element in a: %d\n", *(int *) (find_succ(stack_a, &stack_b)->content));
     printf("max of A: %d\n", *(int *) find_max(stack_a)->content);
@@ -81,39 +80,19 @@ int main(int argc, char **argv)
 
     printf("Operations required to move 'next element to move (in a)': \n");
 
-    current = ops_a;
-    while (current->next)
-    {
-        printf("%s\n", (char *) current->content);
-        current = current->next;
-    }
-    printf("%s\n", (char *) current->content);
+    print_ops(ops_a);
 
     printf("\n");
 
-     printf("Operations required to move 'next element to move (in b)': \n");
+    printf("Operations required to move 'next element to move (in b)': \n");
 
-    current = ops_b;
-    while (current->next)
-    {
-        printf("%s\n", (char *) current->content);
-        current = current->next;
-    }
-    printf("%s\n", (char *) current->content);
+    print_ops(ops_b);
 
     printf("\n");
-
-     printf("\n");
 
     printf("OVERALL Operations required to move next element: \n");
 
-    current = ops;
-    while (current->next)
-    {
-        printf("%s\n", (char *) current->content);
-        current = current->next;
-    }
-    printf("%s\n", (char *) current->content);
+    print_ops(ops);
 
     ////////////////////////////////////////////////
     printf("\n");
