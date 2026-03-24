@@ -4,12 +4,14 @@
 #include <stdio.h>
 #include "push_swap.h"
 
+static void print_stack(t_list *stack);
+
 int main(int argc, char **argv)
 {
     t_list *stack_a;
     t_list *stack_b;
     t_list  *current;
-    t_list  *ops;
+    //t_list  *ops;
     t_list  *ops_a;
     t_list  *ops_b;
     int flag;
@@ -22,17 +24,26 @@ int main(int argc, char **argv)
         return (-1); //return ERROR
     stack_b = str_to_list(argv[2]);
 
-    // op_count = 0;
-
-    // ops = get_next_ops(stack_a, stack_b);
+    // ops = get_ops(stack_a, stack_b);
     // if (!ops)
     //    return (free_all(stack_a, stack_b), -1); //return ERROR
-    // perform_ops(&stack_a, &stack_b, ops);
-   // op_count += print_ops(ops);
+    // op_cnt = perform_ops(&stack_a, &stack_b, ops);
 
-   // sort_3(&stack_a);
+    // push_3(&stack_a, &stack_b);
+   // sort_3_desc(&stack_b);
+
    // shift_back(&stack_a, &stack_a);
+    // while (stack_a)
+    // {
+        // ops = get_ops(stack_a, stack_b);
+        // if (!ops)
+        //    return (free_all(stack_a, stack_b), -1); //return ERROR
+        // op_cnt += perform_ops(&stack_a, &stack_b, ops);
+        // print_ops(ops);
 
+    // }
+    // printf("Number of operations: %d\n", op_cnt);
+    
     // BEFORE OPERATIONS
     printf("Stack A:\n");
 
@@ -52,15 +63,7 @@ int main(int argc, char **argv)
 
     printf("Stack B:\n");
 
-    current = stack_b;
-    while (current->next)
-    {
-        printf("%d\n", *((int *) current->content));
-        current = current->next;
-    }
-    printf("%d\n", *((int *) current->content));
-
-    printf("\n");
+    print_stack(stack_b);
     
     // OPERATIONS //////////////////////////////////
 
@@ -73,7 +76,7 @@ int main(int argc, char **argv)
     flag = 0;
     ops_a = get_ops_a(get_next_elem(&stack_a, &stack_b), &stack_a, &flag);
     ops_b = get_ops_b(get_next_elem(&stack_a, &stack_b), &stack_a, &stack_b, flag);
-    ops = get_ops(get_next_elem(&stack_a, &stack_b), &stack_a, &stack_b);
+    //ops = get_ops(get_next_elem(&stack_a, &stack_b), &stack_a, &stack_b);
 
 
     printf("\n");
@@ -92,7 +95,7 @@ int main(int argc, char **argv)
 
     printf("OVERALL Operations required to move next element: \n");
 
-    print_ops(ops);
+    //print_ops(ops);
 
     ////////////////////////////////////////////////
     printf("\n");
@@ -100,27 +103,30 @@ int main(int argc, char **argv)
     // AFTER OPERATIONS
     printf("Stack A:\n");
 
-    current = stack_a;
-    while (current->next)
-    {
-        printf("%d\n", *((int *) current->content));
-        current = current->next;
-    }
-    printf("%d\n", *((int *) current->content));
-
-    printf("\n");
+    print_stack(stack_a);
 
     printf("Stack B:\n");
 
-    current = stack_b;
-    while (current->next)
-    {
-        printf("%d\n", *((int *) current->content));
-        current = current->next;
-    }
-    printf("%d\n", *((int *) current->content));
+   print_stack(stack_b);
+
+   sort_3_desc(&stack_b);
+   printf("Sorted stack:\n");
+   print_stack(stack_b);
 
     return (0);
 }
 
 //static void free_all()
+
+static void print_stack(t_list *stack)
+{
+    t_list  *curr;
+
+    curr = stack;
+    while (curr->next)
+    {
+        printf("%d\n", *((int *) curr->content));
+        curr = curr->next;
+    }
+    printf("%d\n\n", *((int *) curr->content));
+}

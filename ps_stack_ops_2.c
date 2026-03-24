@@ -24,3 +24,13 @@ void    pb(t_list **stack_a, t_list **stack_b)
     *stack_a = (*stack_a)->next;
     ft_lstadd_front(stack_b, top_a);
 }
+
+void    switcheroo(t_list **stack)
+{
+    t_list  *tmp;
+
+    tmp = *stack;
+    *stack = (*stack)->next;
+    tmp->next = (*stack)->next;
+    (*stack)->next = tmp;
+}

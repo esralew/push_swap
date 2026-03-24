@@ -2,9 +2,11 @@
 // 42 HEADER
 
 #include "push_swap.h"
-// REMOVE BELOW
-#include <stdio.h>
 
+// we leave the dummy node from get_ops_a() in comm_lst, so if there is only
+// one node in comm_lst, that means there aren't any operations inside comm_lst
+// and we return the comm_lst unchanged
+// -> prevention of dereferencing NULL
 t_list  *opt_comm_lst(t_list **comm_lst)
 {
     t_list  *p1;
@@ -13,8 +15,8 @@ t_list  *opt_comm_lst(t_list **comm_lst)
 
     p1 = *comm_lst;
     p2 = *comm_lst;
-    // REMOVE BELOW
-    printf("\n  last element of comm_lst: %s \n", (char *) ft_lstlast(*comm_lst)->content);
+    if (ft_lstsize(*comm_lst) == 1)
+        return (*comm_lst);
     if (check_b_op(p1) || check_a_op(ft_lstlast(*comm_lst)))
         return (*comm_lst);
     while (check_a_op(p2->next))
@@ -39,29 +41,14 @@ t_list  *opt_comm_lst(t_list **comm_lst)
             free(p1->content);
             p1->content = new_comm; 
         }
+        ft_lstdel_back(comm_lst, free);
         if (p1 == p2)
             break;
-        ft_lstdel_back(comm_lst, free);
         p1 = p1->next;
     }
     return (*comm_lst);
     
 ////////////////////////////////////////////////FÜR WEITERE PLANUNG SIEHE SKIZZE    
-   
-    // while (curr->next)
-    // {
-    //     if (*(char *) curr->content == "ra" || *(char *) curr->content == "rra")
-    //         num_ops_a++;
-    //     else
-    //         num_ops_b++;
-    //     curr = curr->next;
-    // }
-    // if (*(char *) curr->content == "ra" || *(char *) curr->content == "rra")
-    //     num_ops_a++;
-    // else
-    //     num_ops_b++;
-    
-        ///////////////////////////////////////
 } 
 
 int check_a_op(t_list *node)

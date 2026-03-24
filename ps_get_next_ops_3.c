@@ -45,15 +45,15 @@ t_list  *get_ops(t_list *next_elem, t_list **stack_a, t_list **stack_b)
     comm_lst = get_ops_a(next_elem, stack_a, &flag);
     if (!comm_lst)
         return (NULL);
-    ft_lstdel_front(&comm_lst, free);
     b_list = get_ops_b(next_elem, stack_a, stack_b, flag);
     if (!b_list)
         return (ft_lstclear(&comm_lst, free), NULL);
     ft_lstdel_front(&b_list, free);
     ft_lstadd_back(&comm_lst, b_list);
     fin_comm_lst = opt_comm_lst(&comm_lst);
-    if (!(fin_comm_lst))
+    if (!fin_comm_lst)
         return (ft_lstclear(&comm_lst, free), NULL);
+    ft_lstdel_front(&comm_lst, free);
     pb = ft_strdup ("pb");
     if (!pb)
         return (ft_lstclear(&fin_comm_lst, free), NULL);

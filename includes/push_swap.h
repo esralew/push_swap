@@ -13,6 +13,7 @@ void    rotrot(t_list **stack_a, t_list **stack_b);
 void    rrotrrot(t_list **stack_a, t_list **stack_b);
 void    pa(t_list **stack_a, t_list **stack_b);
 void    pb(t_list **stack_a, t_list **stack_b);
+void    switcheroo(t_list **stack);
 
 t_list *get_next_ops(t_list **stack_a, t_list **stack_b);
 t_list  *find_succ(t_list *node, t_list **stack_b);
@@ -42,5 +43,6 @@ int check_rrb(t_list *node);
 int check_a_op(t_list *node);
 int check_b_op(t_list *node);
 void    print_ops(t_list *ops);
+void    sort_3_desc(t_list **stack);
 
 #endif
