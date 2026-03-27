@@ -4,6 +4,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft.h"
+# include <stdio.h>
 
 t_list   *str_to_list(char *input_str);
 
@@ -42,7 +43,8 @@ int check_rb(t_list *node);
 int check_rrb(t_list *node);
 int check_a_op(t_list *node);
 int check_b_op(t_list *node);
-void    print_ops(t_list *ops);
+int    print_ops(t_list *ops);
 void    sort_3_desc(t_list **stack);
+void    perform_ops(t_list *ops, t_list **stack_a, t_list **stack_b);
 
 #endif

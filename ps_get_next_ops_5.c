@@ -13,10 +13,10 @@ t_list  *opt_comm_lst(t_list **comm_lst)
     t_list  *p2;
     char    *new_comm;
 
-    p1 = *comm_lst;
-    p2 = *comm_lst;
     if (ft_lstsize(*comm_lst) == 1)
         return (*comm_lst);
+    p1 = (*comm_lst)->next;
+    p2 = *comm_lst;
     if (check_b_op(p1) || check_a_op(ft_lstlast(*comm_lst)))
         return (*comm_lst);
     while (check_a_op(p2->next))

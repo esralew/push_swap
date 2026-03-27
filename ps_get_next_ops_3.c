@@ -1,33 +1,34 @@
 
 // 42 HEADER
 
+// REMOVE BELOW
+#include <stdio.h>
+
 #include "push_swap.h"
 
 t_list  *get_next_elem(t_list **stack_a, t_list **stack_b)
 {
     t_list  *curr;
-    t_list  *first;
     t_list  *next_elem;
     int min_cost;
 
-    curr = NULL;
-    first = *stack_a;
+    curr = *stack_a;
+    next_elem = curr;
     // wenn zuviele lines, dann hier workaround mit min_cost = INT_MAX
-    min_cost = calc_cost(first, stack_a, stack_b);
-    next_elem = first;
-    if (first->next)
-        curr = first->next;
-    while (curr->next)
+    min_cost = calc_cost(curr, stack_a, stack_b);
+    if (!(curr->next))
+        return (curr);
+    while (1)
     {
         if (calc_cost(curr, stack_a, stack_b) < min_cost)
         {
             min_cost = calc_cost(curr, stack_a, stack_b);
             next_elem = curr;
         }
+        if (!(curr->next))
+            break;
         curr = curr->next;
     }
-    if (calc_cost(curr, stack_a, stack_b) < min_cost)
-        next_elem = curr;
     return (next_elem);
 }
 
@@ -41,7 +42,6 @@ t_list  *get_ops(t_list *next_elem, t_list **stack_a, t_list **stack_b)
     char    *pb;
 
     flag = 0;
-    //////////////////////////////
     comm_lst = get_ops_a(next_elem, stack_a, &flag);
     if (!comm_lst)
         return (NULL);
@@ -53,7 +53,7 @@ t_list  *get_ops(t_list *next_elem, t_list **stack_a, t_list **stack_b)
     fin_comm_lst = opt_comm_lst(&comm_lst);
     if (!fin_comm_lst)
         return (ft_lstclear(&comm_lst, free), NULL);
-    ft_lstdel_front(&comm_lst, free);
+    ft_lstdel_front(&fin_comm_lst, free);
     pb = ft_strdup ("pb");
     if (!pb)
         return (ft_lstclear(&fin_comm_lst, free), NULL);
@@ -62,7 +62,6 @@ t_list  *get_ops(t_list *next_elem, t_list **stack_a, t_list **stack_b)
         return (ft_lstclear(&fin_comm_lst, free), NULL);
     ft_lstadd_back(&fin_comm_lst, push);
     return (fin_comm_lst);
-    //////////////////////////////////
 }
 
 // if flag is still 0 after call of calc_cost_a, then we do normal rotations 

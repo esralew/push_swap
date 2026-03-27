@@ -47,8 +47,7 @@ The last element becomes the first one.
 ### Resources
 
 + Space complexity: https://www.datacamp.com/tutorial/space-complexity?dc_referrer=https%3A%2F%2Fwww.google.com%2F
-+ Mechanical Turk (Historical Background): https://en.wikipedia.org/wiki/Mechanical_Turk
-+ Amazon's Mechanical Turk service: https://en.wikipedia.org/wiki/Amazon_Mechanical_Turk
++ Mechanical Turk: https://en.wikipedia.org/wiki/Mechanical_Turk
 + 
 
 ### How the implemented algorithm works
@@ -57,6 +56,9 @@ The last element becomes the first one.
 
 ### General Learnings
 
+#### exit()
+
++ The **void exit(int status)** function is included in stdlib.h and terminates the program/process immediately, sending the status information to the parent process. The macros EXIT_FAILURE and EXIT_SUCCESS for the status are predefined in stdlib.h and do not need to be specified (usually they expand to 0 and 1). Using them instead of 0 ad 1 is better practice for better portability. 
 #### Structs in C
 
 ```

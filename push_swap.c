@@ -11,9 +11,10 @@ int main(int argc, char **argv)
     t_list *stack_a;
     t_list *stack_b;
     t_list  *current;
-    //t_list  *ops;
+    t_list  *ops;
     t_list  *ops_a;
     t_list  *ops_b;
+    t_list  *next_elem;
     int flag;
     int cost_a;
 
@@ -22,7 +23,19 @@ int main(int argc, char **argv)
     stack_a = str_to_list(argv[1]);
     if (!stack_a)
         return (-1); //return ERROR
-    stack_b = str_to_list(argv[2]);
+    stack_b = NULL;
+
+    push_3(stack_a, stack_b);
+    sort_3_desc(&stack_b);
+    while (1)
+    {
+        next_elem = get_next_elem(&stack_a, &stack_b);
+        ops = get_ops(next_elem, &stack_a, &stack_b);
+        perform_ops(ops, &stack_a, &stack_b);
+        print_ops(ops);
+        if (!stack_a)
+            break;
+    }
 
     // ops = get_ops(stack_a, stack_b);
     // if (!ops)
@@ -64,19 +77,21 @@ int main(int argc, char **argv)
     printf("Stack B:\n");
 
     print_stack(stack_b);
+
+    printf("\n");
     
     // OPERATIONS //////////////////////////////////
 
     // printf("required rotations for top element in stack a: %d\n", get_req_rot(stack_a, &stack_a));
     // printf("required rev rotations for top element in stack a: %d\n", get_req_rrot(stack_a, &stack_a));
     printf("top element a: %d\n", *(int *) stack_a->content);
-    printf("Successor of top element in a: %d\n", *(int *) (find_succ(stack_a, &stack_b)->content));
+    // printf("Successor of top element in a: %d\n", *(int *) (find_succ(stack_a, &stack_b)->content));
     printf("max of A: %d\n", *(int *) find_max(stack_a)->content);
     printf("Next element to move: %d\n", *(int *) get_next_elem(&stack_a, &stack_b)->content);
     flag = 0;
     ops_a = get_ops_a(get_next_elem(&stack_a, &stack_b), &stack_a, &flag);
     ops_b = get_ops_b(get_next_elem(&stack_a, &stack_b), &stack_a, &stack_b, flag);
-    //ops = get_ops(get_next_elem(&stack_a, &stack_b), &stack_a, &stack_b);
+    ops = get_ops(get_next_elem(&stack_a, &stack_b), &stack_a, &stack_b);
 
 
     printf("\n");
@@ -95,22 +110,22 @@ int main(int argc, char **argv)
 
     printf("OVERALL Operations required to move next element: \n");
 
-    //print_ops(ops);
+    print_ops(ops);
+
+    perform_ops(ops, &stack_a, &stack_b);
 
     ////////////////////////////////////////////////
     printf("\n");
 
     // AFTER OPERATIONS
-    printf("Stack A:\n");
+    printf("Stack A after ops:\n");
 
     print_stack(stack_a);
 
-    printf("Stack B:\n");
+    printf("\n");
 
-   print_stack(stack_b);
+    printf("Stack B after ops:\n");
 
-   sort_3_desc(&stack_b);
-   printf("Sorted stack:\n");
    print_stack(stack_b);
 
     return (0);
@@ -122,11 +137,24 @@ static void print_stack(t_list *stack)
 {
     t_list  *curr;
 
+    if (!stack)
+        return;
     curr = stack;
-    while (curr->next)
+    while (1)
     {
         printf("%d\n", *((int *) curr->content));
+        if (!(curr->next))
+            break;
         curr = curr->next;
     }
-    printf("%d\n\n", *((int *) curr->content));
+}
+
+static void push_3(t_list **stack_a, t_list **stack_b)
+{
+    pb(&stack_a, &stack_b);
+    pb(&stack_a, &stack_b);
+    pb(&stack_a, &stack_b);
+    printf("pb\n");
+    printf("pb\n");
+    printf("pb\n");
 }
