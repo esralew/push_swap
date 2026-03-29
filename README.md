@@ -59,6 +59,7 @@ The last element becomes the first one.
 #### exit()
 
 + The **void exit(int status)** function is included in stdlib.h and terminates the program/process immediately, sending the status information to the parent process. The macros EXIT_FAILURE and EXIT_SUCCESS for the status are predefined in stdlib.h and do not need to be specified (usually they expand to 0 and 1). Using them instead of 0 ad 1 is better practice for better portability. 
+
 #### Structs in C
 
 ```

@@ -21,6 +21,10 @@ void    perform_ops(t_list *ops, t_list **stack_a, t_list **stack_b)
             rot(stack_b);
         else if (check_rrb(curr))
             rrot(stack_b);
+        else if (check_rr(curr))
+            rotrot(stack_a, stack_b);
+        else if (check_rrr(curr))
+            rrotrrot(stack_a, stack_b);
         else
             pb(stack_a, stack_b);
         if (!(curr->next))

@@ -16,10 +16,16 @@ int main(int argc, char **argv)
 
     (void)argc;
 
-    stack_a = str_to_list(argv[1]);
+    stack_a = str_to_lst(argv);
     if (!stack_a)
         return (-1); //return ERROR
     stack_b = NULL;
+
+    if (ft_lstsize(stack_a) <= 3)
+    {
+        sort_3_asc(&stack_a);
+        return (0);
+    }
 
     push_3(&stack_a, &stack_b);
     sort_3_desc(&stack_b);

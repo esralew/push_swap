@@ -6,7 +6,7 @@
 # include "libft.h"
 # include <stdio.h>
 
-t_list   *str_to_list(char *input_str);
+t_list   *str_to_lst(char **argv);
 
 void    rot(t_list **stack);
 void    rrot(t_list **stack);
@@ -41,10 +41,13 @@ int check_ra(t_list *node);
 int check_rra(t_list *node);
 int check_rb(t_list *node);
 int check_rrb(t_list *node);
+int check_rr(t_list *node);
+int check_rrr(t_list *node);
 int check_a_op(t_list *node);
 int check_b_op(t_list *node);
 int    print_ops(t_list *ops);
 void    sort_3_desc(t_list **stack);
+void    sort_3_asc(t_list **stack);
 void    perform_ops(t_list *ops, t_list **stack_a, t_list **stack_b);
 
 #endif

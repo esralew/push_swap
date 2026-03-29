@@ -3,38 +3,38 @@
 
 #include "push_swap.h"
 
-static t_list *build_list(char **split_arr);
-static void    free_split_arr(char **split_arr);
+static t_list *build_list(char **argv);
+// static void    free_split_arr(char **split_arr);
 
-t_list   *str_to_list(char *input_str)
+t_list   *str_to_lst(char **argv)
 {
-    char    **split_arr;
+    // char    **split_arr;
     t_list   *stack_a;
 
-    split_arr = ft_split(input_str, ' ');
-    if (!split_arr)
-        return (NULL);
-    stack_a = build_list(split_arr);
-    free_split_arr(split_arr);
+    // split_arr = ft_split(input_str, ' ');
+    // if (!split_arr)
+    //     return (NULL);
+    stack_a = build_list(argv);
+    // free_split_arr(split_arr);
     if (!stack_a)
         return (NULL);
     return (stack_a);
 }
 
-static void    free_split_arr(char **split_arr)
-{
-    int i;
+// static void    free_split_arr(char **split_arr)
+// {
+//     int i;
 
-	i = 0;
-	while (split_arr[i])
-	{
-		free(split_arr[i]);
-		i++;
-	}
-	free(split_arr);
-}
+// 	i = 0;
+// 	while (split_arr[i])
+// 	{
+// 		free(split_arr[i]);
+// 		i++;
+// 	}
+// 	free(split_arr);
+// }
 
-static t_list *build_list(char **split_arr)
+static t_list *build_list(char **argv)
 {
     int i;
     t_list   *stack_a;
@@ -42,13 +42,13 @@ static t_list *build_list(char **split_arr)
     int *content;   
 
     stack_a = NULL;
-    i = 0;
-    while (split_arr[i])
+    i = 1;
+    while (argv[i])
     {
         content = (int *) malloc(sizeof(int));
         if (!content)
             return (ft_lstclear(&stack_a, free), NULL);
-        *content = ft_atoi(split_arr[i]);
+        *content = ft_atoi(argv[i]);
         node = ft_lstnew(content);
         if (!node)
             return (ft_lstclear(&stack_a, free), free(content), NULL);

@@ -21,7 +21,7 @@ t_list  *opt_comm_lst(t_list **comm_lst)
         return (*comm_lst);
     while (check_a_op(p2->next))
         p2 = p2->next;
-    if (ft_strlen((char *) p1->content) != (ft_strlen((char *) p2->content)))
+    if (ft_strlen((char *) p1->content) != (ft_strlen((char *) p2->next->content)))
         return (*comm_lst);
     while (p2->next)
     {
@@ -106,6 +106,28 @@ int check_rrb(t_list *node)
 
     cont = (char *) node->content;
     if (ft_strncmp(cont, "rrb", 3) == 0)
+        return (1);
+    else 
+        return (0);
+}
+
+int check_rr(t_list *node)
+{
+    char    *cont;
+
+    cont = (char *) node->content;
+    if (ft_strncmp(cont, "rr", 3) == 0)
+        return (1);
+    else 
+        return (0);
+}
+
+int check_rrr(t_list *node)
+{
+    char    *cont;
+
+    cont = (char *) node->content;
+    if (ft_strncmp(cont, "rrr", 3) == 0)
         return (1);
     else 
         return (0);
