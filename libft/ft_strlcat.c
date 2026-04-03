@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elewin <elewin@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 18:14:34 by elewin            #+#    #+#             */
-/*   Updated: 2025/11/26 19:43:34 by elewin           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:20:04 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {

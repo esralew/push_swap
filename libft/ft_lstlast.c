@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elewin <elewin@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:27:01 by elewin            #+#    #+#             */
-/*   Updated: 2025/12/10 20:29:23 by elewin           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:18:47 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {

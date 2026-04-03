@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elewin <elewin@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 19:28:24 by elewin            #+#    #+#             */
-/*   Updated: 2025/12/03 19:25:43 by elewin           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:19:56 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 char	*ft_strdup(const char *s)
 {

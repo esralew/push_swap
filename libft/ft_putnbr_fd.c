@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elewin <elewin@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:55:17 by elewin            #+#    #+#             */
-/*   Updated: 2025/12/05 15:19:26 by elewin           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:19:43 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 static void	put_pos_nbr(int n, int fd);
 

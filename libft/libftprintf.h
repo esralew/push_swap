@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elewin <elewin@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 12:30:22 by elewin            #+#    #+#             */
-/*   Updated: 2025/12/12 10:51:13 by elewin           ###   ########.fr       */
+/*   Created: 2026/03/30 16:28:24 by elewin            #+#    #+#             */
+/*   Updated: 2026/04/01 17:59:44 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
+# include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -66,5 +67,14 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+int					ft_printf(const char *format, ...);
+int					print_char(va_list args);
+int					print_str(va_list args);
+int					print_int(va_list args);
+int					print_hex(va_list args, char specifier);
+int					print_uint(va_list args);
+int					print_pointer(va_list args, char specifier);
+void				ft_put_large_nbr(unsigned long int n);
+void				ft_put_large_nbr_hex(unsigned long int n, char specifier);
 
 #endif

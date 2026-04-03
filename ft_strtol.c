@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strtol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 15:34:05 by elewin            #+#    #+#             */
-/*   Updated: 2026/03/31 13:17:52 by elewin           ###   ########.fr       */
+/*   Created: 2026/03/31 16:25:25 by elewin            #+#    #+#             */
+/*   Updated: 2026/03/31 18:14:16 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "push_swap.h"
 
 static int	ft_isspace(char c);
 
-int	ft_atoi(const char *nptr)
+long	ft_strtol(const char *nptr)
 {
-	int	i;
-	int	sign_flag;
-	int	res;
+	int		i;
+	int		sign_flag;
+	long	res;
 
 	i = 0;
 	while (ft_isspace(nptr[i]))

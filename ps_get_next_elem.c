@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_print_ops.c                                     :+:      :+:    :+:   */
+/*   ps_get_next_elem.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 15:36:51 by elewin            #+#    #+#             */
-/*   Updated: 2026/04/01 18:39:03 by elewin           ###   ########.fr       */
+/*   Created: 2026/03/30 15:36:07 by elewin            #+#    #+#             */
+/*   Updated: 2026/04/01 18:40:57 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	print_ops(t_list *ops)
+t_list	*get_next_elem(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*curr;
-	int		cnt;
+	t_list	*next_elem;
+	int		min_cost;
 
-	cnt = 0;
-	curr = ops;
+	curr = *stack_a;
+	next_elem = curr;
+	min_cost = calc_cost(curr, stack_a, stack_b);
+	if (!(curr->next))
+		return (curr);
 	while (1)
 	{
-		ft_printf("%s\n", (char *)curr->content);
-		cnt++;
+		if (calc_cost(curr, stack_a, stack_b) < min_cost)
+		{
+			min_cost = calc_cost(curr, stack_a, stack_b);
+			next_elem = curr;
+		}
 		if (!(curr->next))
 			break ;
 		curr = curr->next;
 	}
-	return (cnt);
+	return (next_elem);
 }

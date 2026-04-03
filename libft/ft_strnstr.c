@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elewin <elewin@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 15:27:36 by elewin            #+#    #+#             */
-/*   Updated: 2025/12/12 13:07:41 by elewin           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:20:21 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 //#include <string.h>
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)

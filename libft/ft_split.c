@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elewin <elewin@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: elewin <elewin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:07:54 by elewin            #+#    #+#             */
-/*   Updated: 2025/12/12 13:12:17 by elewin           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:19:48 by elewin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 static size_t	get_word_count(char const *s, char c);
 static size_t	get_word_len(char const *s, char c);
